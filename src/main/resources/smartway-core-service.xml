@@ -10,18 +10,18 @@
         http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
         
-	<bean id="userInfoDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
-		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.UserInfo" />
+	
+	<bean id="userInfoService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+		<constructor-arg ref="userInfoDAO" />
 	</bean>
-
-	<bean id="userAuthDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
-		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.UserAuth" />
+	<bean id="userAuthService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+		<constructor-arg ref="userAuthDAO" />
 	</bean>
-	<bean id="deviceDataDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
-		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.DeviceData" />
+	<bean id="listUserDevicesService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+		<constructor-arg ref="listUserDevicesDAO" />
 	</bean>
-	<bean id="listUserDevicesDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
-		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.ListUserDevices" />
+	<bean id="deviceDataService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+		<constructor-arg ref="deviceDataDAO" />
 	</bean>
 	               
 </beans>

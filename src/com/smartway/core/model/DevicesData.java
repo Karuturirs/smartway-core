@@ -3,6 +3,7 @@ package com.smartway.core.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -12,7 +13,7 @@ public class DevicesData {
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	private int id;
-	@Id
+	@PrimaryKeyJoinColumn
 	@Column(name = "ITEM_ID", nullable = false)
 	private String itemId;
 	@Column(name = "col1")

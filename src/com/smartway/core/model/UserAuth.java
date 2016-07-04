@@ -3,17 +3,20 @@ package com.smartway.core.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
+import org.springframework.context.annotation.Primary;
 
 
 @Entity
 @Table(name="USER_AUTH")
 public class UserAuth {
 	
-	@Id
-	@Column(name = "USER_ID", nullable = false)
+	@Column(name = "USER_ID",updatable=false, nullable = false)
 	private int userId;
-	@Column(name = "USER_NAME", unique = true, nullable = false)
+	@Column(name = "USER_NAME",updatable=false, unique = true, nullable = false)
 	private String userName;
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;

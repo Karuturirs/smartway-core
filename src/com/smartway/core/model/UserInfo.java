@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class UserInfo {
 	
 	@Id
-	@Column(name = "USER_ID", unique = true, nullable = false)
+	@Column(name = "USER_ID",updatable=false, unique = true, nullable = false)
 	private int userId;
 	@Column(name = "FIRST_NAME", nullable = false)
 	private String firstName;
@@ -21,7 +21,7 @@ public class UserInfo {
 	private String birthDate;
 	@Column(name = "PHONE", nullable = false)
 	private String phone;
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "EMAIL",updatable=false, nullable = false)
 	private String email;
 	@Column(name = "GENDER", nullable = false)
 	private char gender;
