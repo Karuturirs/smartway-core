@@ -1,61 +1,78 @@
 package com.smartway.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.ForeignKey;
-import org.springframework.context.annotation.Primary;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 
+/**
+ * The persistent class for the USER_AUTH database table.
+ * 
+ */
 @Entity
 @Table(name="USER_AUTH")
-public class UserAuth {
-	
-	@Column(name = "USER_ID",updatable=false, nullable = false)
-	private int userId;
-	@Column(name = "USER_NAME",updatable=false, unique = true, nullable = false)
+@NamedQuery(name="UserAuth.findAll", query="SELECT u FROM UserAuth u")
+public class UserAuth implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="USER_NAME")
 	private String userName;
-	@Column(name = "PASSWORD", nullable = false)
+
+	@Column(name="CRT_TS")
+	private Timestamp crtTs;
+
 	private String password;
-	@Column(name = "CRT_TS" )
-	private String crtTimeStamp;
-	@Column(name = "UPD_TS")
-	private String uptTimeStamp;
-	
-	
-	public int getUserId() {
-		return userId;
+
+	@Column(name="UPD_TS")
+	private Timestamp updTs;
+
+	//bi-directional many-to-one association to UserInfo
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
+	private UserInfo userInfo;
+
+	public UserAuth() {
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 	public String getUserName() {
-		return userName;
+		return this.userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassword() {
-		return password;
+
+	public Timestamp getCrtTs() {
+		return this.crtTs;
 	}
+
+	public void setCrtTs(Timestamp crtTs) {
+		this.crtTs = crtTs;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCrtTimeStamp() {
-		return crtTimeStamp;
+
+	public Timestamp getUpdTs() {
+		return this.updTs;
 	}
-	public void setCrtTimeStamp(String crtTimeStamp) {
-		this.crtTimeStamp = crtTimeStamp;
+
+	public void setUpdTs(Timestamp updTs) {
+		this.updTs = updTs;
 	}
-	public String getUptTimeStamp() {
-		return uptTimeStamp;
+
+	public UserInfo getUserInfo() {
+		return this.userInfo;
 	}
-	public void setUptTimeStamp(String uptTimeStamp) {
-		this.uptTimeStamp = uptTimeStamp;
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
-	
-	
+
 }

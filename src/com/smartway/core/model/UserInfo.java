@@ -1,90 +1,173 @@
 package com.smartway.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 
+/**
+ * The persistent class for the USER_INFO database table.
+ * 
+ */
 @Entity
 @Table(name="USER_INFO")
-public class UserInfo {
-	
+@NamedQuery(name="UserInfo.findAll", query="SELECT u FROM UserInfo u")
+public class UserInfo implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name = "USER_ID",updatable=false, unique = true, nullable = false)
+	@Column(name="USER_ID")
 	private int userId;
-	@Column(name = "FIRST_NAME", nullable = false)
-	private String firstName;
-	@Column(name = "LAST_NAME", nullable = false)
-	private String lastName;
-	@Column(name = "BIRTH_DATE", nullable = false)
-	private String birthDate;
-	@Column(name = "PHONE", nullable = false)
-	private String phone;
-	@Column(name = "EMAIL",updatable=false, nullable = false)
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="BIRTH_DATE")
+	private Date birthDate;
+
+	@Column(name="CRT_TS")
+	private Timestamp crtTs;
+
 	private String email;
-	@Column(name = "GENDER", nullable = false)
-	private char gender;
-	@Column(name = "CRT_TS")
-	private String crtTimeStamp;
-	@Column(name = "UPD_TS")
-	private String uptTimeStamp;
-	
-	
-	public int getUserId() {
-		return userId;
+
+	@Column(name="FIRST_NAME")
+	private String firstName;
+
+	private String gender;
+
+	@Column(name="LAST_NAME")
+	private String lastName;
+
+	private String phone;
+
+	@Column(name="UPD_TS")
+	private Timestamp updTs;
+
+	//bi-directional many-to-one association to ListUserDevice
+	@OneToMany(mappedBy="userInfo")
+	private List<ListUserDevice> listUserDevices;
+
+	//bi-directional many-to-one association to UserAuth
+	@OneToMany(mappedBy="userInfo")
+	private List<UserAuth> userAuths;
+
+	public UserInfo() {
 	}
+
+	public int getUserId() {
+		return this.userId;
+	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getFirstName() {
-		return firstName;
+
+	public Date getBirthDate() {
+		return this.birthDate;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getBirthDate() {
-		return birthDate;
-	}
-	public void setBirthDate(String birthDate) {
+
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public String getPhone() {
-		return phone;
+
+	public Timestamp getCrtTs() {
+		return this.crtTs;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setCrtTs(Timestamp crtTs) {
+		this.crtTs = crtTs;
 	}
+
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public char getGender() {
-		return gender;
+
+	public String getFirstName() {
+		return this.firstName;
 	}
-	public void setGender(char gender) {
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getGender() {
+		return this.gender;
+	}
+
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getCrtTimeStamp() {
-		return crtTimeStamp;
+
+	public String getLastName() {
+		return this.lastName;
 	}
-	public String getUptTimeStamp() {
-		return uptTimeStamp;
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public void setUptTimeStamp(String uptTimeStamp ) {
-		//String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new java.util.Date());
-		this.uptTimeStamp = uptTimeStamp;
+
+	public String getPhone() {
+		return this.phone;
 	}
-	
-	
-	
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Timestamp getUpdTs() {
+		return this.updTs;
+	}
+
+	public void setUpdTs(Timestamp updTs) {
+		this.updTs = updTs;
+	}
+
+	public List<ListUserDevice> getListUserDevices() {
+		return this.listUserDevices;
+	}
+
+	public void setListUserDevices(List<ListUserDevice> listUserDevices) {
+		this.listUserDevices = listUserDevices;
+	}
+
+	public ListUserDevice addListUserDevice(ListUserDevice listUserDevice) {
+		getListUserDevices().add(listUserDevice);
+		listUserDevice.setUserInfo(this);
+
+		return listUserDevice;
+	}
+
+	public ListUserDevice removeListUserDevice(ListUserDevice listUserDevice) {
+		getListUserDevices().remove(listUserDevice);
+		listUserDevice.setUserInfo(null);
+
+		return listUserDevice;
+	}
+
+	public List<UserAuth> getUserAuths() {
+		return this.userAuths;
+	}
+
+	public void setUserAuths(List<UserAuth> userAuths) {
+		this.userAuths = userAuths;
+	}
+
+	public UserAuth addUserAuth(UserAuth userAuth) {
+		getUserAuths().add(userAuth);
+		userAuth.setUserInfo(this);
+
+		return userAuth;
+	}
+
+	public UserAuth removeUserAuth(UserAuth userAuth) {
+		getUserAuths().remove(userAuth);
+		userAuth.setUserInfo(null);
+
+		return userAuth;
+	}
 
 }
