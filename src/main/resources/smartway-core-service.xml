@@ -11,16 +11,16 @@
         http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
         
 	
-	<bean id="userInfoService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+	<bean id="userInfoService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="userInfoDAO" />
 	</bean>
-	<bean id="userAuthService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+	<bean id="userAuthService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="userAuthDAO" />
 	</bean>
-	<bean id="listUserDevicesService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+	<bean id="listUserDevicesService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="listUserDevicesDAO" />
 	</bean>
-	<bean id="deviceDataService" class="com.bookmark.restservice.mysql.service.GenericServiceImpl">
+	<bean id="deviceDataService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="deviceDataDAO" />
 	</bean>
 	               
