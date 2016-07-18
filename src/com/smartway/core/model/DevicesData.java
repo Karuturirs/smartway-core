@@ -13,7 +13,8 @@ import java.sql.Timestamp;
 @Table(name="DEVICES_DATA")
 @NamedQuery(name="DevicesData.findAll", query="SELECT d FROM DevicesData d")
 public class DevicesData implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 3937916044098825313L;
 
 	@Id
 	private int id;
@@ -38,8 +39,6 @@ public class DevicesData implements Serializable {
 
 	private String col9;
 
-	@Column(name="CRT_TS")
-	private Timestamp crtTs;
 
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
@@ -138,14 +137,6 @@ public class DevicesData implements Serializable {
 
 	public void setCol9(String col9) {
 		this.col9 = col9;
-	}
-
-	public Timestamp getCrtTs() {
-		return this.crtTs;
-	}
-
-	public void setCrtTs(Timestamp crtTs) {
-		this.crtTs = crtTs;
 	}
 
 	public Timestamp getUpdTs() {

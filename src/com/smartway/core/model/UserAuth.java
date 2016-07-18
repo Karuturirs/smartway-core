@@ -13,14 +13,13 @@ import java.sql.Timestamp;
 @Table(name="USER_AUTH")
 @NamedQuery(name="UserAuth.findAll", query="SELECT u FROM UserAuth u")
 public class UserAuth implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+
+	private static final long serialVersionUID = -8721473268993927610L;
 
 	@Id
 	@Column(name="USER_NAME")
 	private String userName;
-
-	@Column(name="CRT_TS")
-	private Timestamp crtTs;
 
 	private String password;
 
@@ -43,14 +42,7 @@ public class UserAuth implements Serializable {
 		this.userName = userName;
 	}
 
-	public Timestamp getCrtTs() {
-		return this.crtTs;
-	}
-
-	public void setCrtTs(Timestamp crtTs) {
-		this.crtTs = crtTs;
-	}
-
+	
 	public String getPassword() {
 		return this.password;
 	}

@@ -14,7 +14,8 @@ import java.util.List;
 @Table(name="LIST_USER_DEVICES")
 @NamedQuery(name="ListUserDevice.findAll", query="SELECT l FROM ListUserDevice l")
 public class ListUserDevice implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1539761765029241482L;
 
 	@Id
 	@Column(name="ITEM_ID")
@@ -60,9 +61,7 @@ public class ListUserDevice implements Serializable {
 
 	private String col9type;
 
-	@Column(name="CRT_TS")
-	private Timestamp crtTs;
-
+	
 	private int id;
 
 	@Column(name="ITEM_DESC")
@@ -257,14 +256,7 @@ public class ListUserDevice implements Serializable {
 		this.col9type = col9type;
 	}
 
-	public Timestamp getCrtTs() {
-		return this.crtTs;
-	}
-
-	public void setCrtTs(Timestamp crtTs) {
-		this.crtTs = crtTs;
-	}
-
+	
 	public int getId() {
 		return this.id;
 	}

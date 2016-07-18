@@ -19,6 +19,7 @@ public class Common {
 		JSONObject object = new JSONObject();
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(obj);
+		System.out.println("-->"+jsonString);
 		JSONParser jsonParser = new JSONParser();
 		object = (JSONObject) jsonParser.parse(jsonString);
 		return object;

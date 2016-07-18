@@ -19,9 +19,9 @@
 	</bean>
 	<bean id="listUserDevicesService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="listUserDevicesDAO" />
-	</bean>
+	</bean> 
 	<bean id="deviceDataService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="deviceDataDAO" />
 	</bean>
-	               
+	        
 </beans>

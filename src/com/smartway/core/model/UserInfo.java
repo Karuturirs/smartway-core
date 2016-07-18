@@ -15,7 +15,8 @@ import java.util.List;
 @Table(name="USER_INFO")
 @NamedQuery(name="UserInfo.findAll", query="SELECT u FROM UserInfo u")
 public class UserInfo implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 649734565057802740L;
 
 	@Id
 	@Column(name="USER_ID")
@@ -24,9 +25,6 @@ public class UserInfo implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
-
-	@Column(name="CRT_TS")
-	private Timestamp crtTs;
 
 	private String email;
 
@@ -44,11 +42,11 @@ public class UserInfo implements Serializable {
 	private Timestamp updTs;
 
 	//bi-directional many-to-one association to ListUserDevice
-	@OneToMany(mappedBy="userInfo")
+	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
 	private List<ListUserDevice> listUserDevices;
 
 	//bi-directional many-to-one association to UserAuth
-	@OneToMany(mappedBy="userInfo")
+	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
 	private List<UserAuth> userAuths;
 
 	public UserInfo() {
@@ -70,13 +68,6 @@ public class UserInfo implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public Timestamp getCrtTs() {
-		return this.crtTs;
-	}
-
-	public void setCrtTs(Timestamp crtTs) {
-		this.crtTs = crtTs;
-	}
 
 	public String getEmail() {
 		return this.email;
