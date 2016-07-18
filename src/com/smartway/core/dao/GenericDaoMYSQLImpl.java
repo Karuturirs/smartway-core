@@ -35,6 +35,7 @@ import org.springframework.util.Assert;
  * @param <PK> the primary key for that type
  *
  */
+
 @SuppressWarnings("unchecked")
 public class GenericDaoMYSQLImpl<T, PK extends Serializable> implements GenericDao<T, PK>, Serializable {
 

@@ -1,2 +1,4 @@
 /bin/
 /target/
+src/com/smartway/core/utils/jdbcConnection.java
+src/main/resources/jdbc.properties
