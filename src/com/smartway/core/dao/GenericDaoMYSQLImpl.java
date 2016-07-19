@@ -1,6 +1,7 @@
 package com.smartway.core.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ import org.hibernate.type.NullableType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
+
+import com.smartway.core.model.UserInfo;
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold

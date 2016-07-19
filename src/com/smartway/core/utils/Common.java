@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,9 +20,10 @@ public class Common {
 		JSONObject object = new JSONObject();
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(obj);
-		System.out.println("-->"+jsonString);
 		JSONParser jsonParser = new JSONParser();
-		object = (JSONObject) jsonParser.parse(jsonString);
+		//object = (JSONObject) jsonParser.parse(jsonString);
+		object.put("list", obj);
+		System.out.println("-->"+object.toJSONString());
 		return object;
 	}
 }
