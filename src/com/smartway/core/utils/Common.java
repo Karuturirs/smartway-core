@@ -1,6 +1,8 @@
 package com.smartway.core.utils;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -25,5 +27,12 @@ public class Common {
 		JSONObject object = new JSONObject();
 		object.put(key,obj);
 		return object;
+	}
+	public java.util.Date toDate(Timestamp timestamp) {
+	    long milliseconds = timestamp.getTime() + (timestamp.getNanos() / 1000000);
+	    return new java.util.Date(milliseconds);
+	}
+	public String toDateFormat(Timestamp timestamp,String format) {
+		return (new SimpleDateFormat(format).format(timestamp));
 	}
 }
