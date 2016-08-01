@@ -20,19 +20,20 @@ public class GenerateID {
 	private static Logger logger = Logger.getLogger(GenerateID.class);
 	
 	@Autowired
-	GenericService genItemIdService;
+	 GenericService genItemIdService;
 	
-	public static void main(String[] args) {	
+	/*public static void main(String[] args) {	
 		String customerid="A0AAA00";	
 		//logger.debug("current new user id:"+generateNextID(customerid));
+		System.out.println(generateNextID());
 	}
 	
-	
+	*/
 	/*genrateNextID method gives you the next id for the given id
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
 	 */
-	public String generateNextID(){
+	public  String generateNextID(){
 		String lastcustomerid = getlastid();
 		char[]  id=lastcustomerid.toCharArray();
 		String nextcustomerid = "";
@@ -59,12 +60,12 @@ public class GenerateID {
 			nextcustomerid="A"+nextcustomerid;
 		
 		logger.debug("GenerateID::generateNextID:: current new user id:"+nextcustomerid);
-		updatenewid(nextcustomerid);
+		updateNewId(nextcustomerid);
 		return nextcustomerid;
 	}
 
 
-	private void updatenewid(String nextcustomerid) {
+	private  void updateNewId(String nextcustomerid) {
 		// TODO Auto-generated method stub
 		GenItemid getitemid = new GenItemid();
 		getitemid.setId(1);
@@ -74,9 +75,9 @@ public class GenerateID {
 	}
 
 
-	private String getlastid() {
+	private  String getlastid() {
 		// TODO Auto-generated method stub
-		Collection<GenItemid> getid = genItemIdService.findBySQLQuery("select IOTID from GEN_ITEMID where ID =1");
+		Collection<GenItemid> getid = genItemIdService.findBySQLQuery("select * from GEN_ITEMID where ID =1");
 		if(getid.size()!=0){
 			for (GenItemid getitemid : getid) {
 				return getitemid.getIotid();
