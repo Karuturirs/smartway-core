@@ -23,5 +23,8 @@
 	<bean id="deviceDataService" class="com.smartway.core.mysql.service.GenericServiceImpl">
 		<constructor-arg ref="deviceDataDAO" />
 	</bean>
+	<bean id="genItemIdService" class="com.smartway.core.mysql.service.GenericServiceImpl">
+		<constructor-arg ref="genItemIdDAO" />
+	</bean>
 	        
 </beans>

@@ -1,6 +1,13 @@
 package com.smartway.core.utils;
 
+import java.util.Collection;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.smartway.core.model.GenItemid;
+import com.smartway.core.model.ListUserDevice;
+import com.smartway.core.mysql.service.GenericService;
 
 
 
@@ -11,10 +18,13 @@ import org.apache.log4j.Logger;
 
 public class GenerateID {
 	private static Logger logger = Logger.getLogger(GenerateID.class);
-
+	
+	@Autowired
+	GenericService genItemIdService;
+	
 	public static void main(String[] args) {	
-		String customerid="A0AAZ99";	
-		logger.debug("current new user id:"+generateNextID(customerid));
+		String customerid="A0AAA00";	
+		//logger.debug("current new user id:"+generateNextID(customerid));
 	}
 	
 	
@@ -22,8 +32,8 @@ public class GenerateID {
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
 	 */
-	public static String generateNextID(String lastcustomerid){
-
+	public String generateNextID(){
+		String lastcustomerid = getlastid();
 		char[]  id=lastcustomerid.toCharArray();
 		String nextcustomerid = "";
 		int len=id.length-1;
@@ -49,7 +59,30 @@ public class GenerateID {
 			nextcustomerid="A"+nextcustomerid;
 		
 		logger.debug("GenerateID::generateNextID:: current new user id:"+nextcustomerid);
+		updatenewid(nextcustomerid);
 		return nextcustomerid;
+	}
+
+
+	private void updatenewid(String nextcustomerid) {
+		// TODO Auto-generated method stub
+		GenItemid getitemid = new GenItemid();
+		getitemid.setId(1);
+		getitemid.setIotid(nextcustomerid);
+		genItemIdService.update(getitemid);
+		
+	}
+
+
+	private String getlastid() {
+		// TODO Auto-generated method stub
+		Collection<GenItemid> getid = genItemIdService.findBySQLQuery("select IOTID from GEN_ITEMID where ID =1");
+		if(getid.size()!=0){
+			for (GenItemid getitemid : getid) {
+				return getitemid.getIotid();
+			}
+		}
+		return null;
 	}
 
 }

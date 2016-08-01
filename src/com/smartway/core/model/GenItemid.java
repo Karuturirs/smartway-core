@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(name="GEN_ITEMID")
 @NamedQuery(name="GenItemid.findAll", query="SELECT g FROM GenItemid g")
 public class GenItemid implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -1945023939990680765L;
 
 	@Id
 	private int id;
