@@ -16,9 +16,9 @@ import com.smartway.core.mysql.service.GenericService;
  */
 
 public class GenerateID {
-	private static Logger logger = Logger.getLogger(GenerateID.class);
+	 private static Logger logger = Logger.getLogger(GenerateID.class);
 	
-	@Autowired
+	 @Autowired
 	 GenericService genItemIdService;
 	
 	/*public static void main(String[] args) {	
@@ -32,7 +32,7 @@ public class GenerateID {
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
 	 */
-	public  String generateNextID(){
+	public synchronized  String generateNextID(){
 		String lastcustomerid = getlastid();
 		char[]  id=lastcustomerid.toCharArray();
 		String nextcustomerid = "";
