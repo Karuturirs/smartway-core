@@ -21,13 +21,7 @@ public class GenerateID {
 	 @Autowired
 	 GenericService genItemIdService;
 	
-	/*public static void main(String[] args) {	
-		String customerid="A0AAA00";	
-		//logger.debug("current new user id:"+generateNextID(customerid));
-		System.out.println(generateNextID());
-	}
 	
-	*/
 	/*genrateNextID method gives you the next id for the given id
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
