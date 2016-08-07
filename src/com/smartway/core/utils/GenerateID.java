@@ -1,7 +1,5 @@
 package com.smartway.core.utils;
 
-import java.util.Collection;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,11 +15,24 @@ import com.smartway.core.mysql.service.GenericService;
 
 public class GenerateID {
 	 private static Logger logger = Logger.getLogger(GenerateID.class);
-	
+	 private static volatile GenerateID instanceObjectValidator = null;
 	 @Autowired
 	 GenericService genItemIdService;
 	
-	
+	private GenerateID(){
+		
+	}
+	 public static GenerateID getInstance() {
+			if (instanceObjectValidator == null) {
+				synchronized (GenerateID.class) {
+					if (instanceObjectValidator == null) {
+						instanceObjectValidator = new GenerateID();
+					}
+				}
+			}
+			return instanceObjectValidator;
+		}
+
 	/*genrateNextID method gives you the next id for the given id
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
@@ -70,13 +81,8 @@ public class GenerateID {
 
 	private  String getlastid() {
 		// TODO Auto-generated method stub
-		Collection<GenItemid> getid = genItemIdService.findBySQLQuery("select * from GEN_ITEMID where ID =1");
-		if(getid.size()!=0){
-			for (GenItemid getitemid : getid) {
-				return getitemid.getIotid();
-			}
-		}
-		return null;
+		String getid = (String) genItemIdService.getBySQLQuery("Select IOTID from GEN_ITEMID where ID =1");
+		return getid;
 	}
 
 }
