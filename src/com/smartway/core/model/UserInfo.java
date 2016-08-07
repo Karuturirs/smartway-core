@@ -54,7 +54,7 @@ public class UserInfo implements Serializable {
 
 	//bi-directional many-to-one association to ListUserDevice
 	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
-	private List<ListUserDevice> listUserDevices;
+	private List<ListUserDevices> listUserDevices;
 
 	//bi-directional many-to-one association to UserAuth
 	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
@@ -128,22 +128,22 @@ public class UserInfo implements Serializable {
 		this.updTs = updTs;
 	}
 
-	public List<ListUserDevice> getListUserDevices() {
+	public List<ListUserDevices> getListUserDevices() {
 		return this.listUserDevices;
 	}
 
-	public void setListUserDevices(List<ListUserDevice> listUserDevices) {
+	public void setListUserDevices(List<ListUserDevices> listUserDevices) {
 		this.listUserDevices = listUserDevices;
 	}
 
-	public ListUserDevice addListUserDevice(ListUserDevice listUserDevice) {
+	public ListUserDevices addListUserDevice(ListUserDevices listUserDevice) {
 		getListUserDevices().add(listUserDevice);
 		listUserDevice.setUserInfo(this);
 
 		return listUserDevice;
 	}
 
-	public ListUserDevice removeListUserDevice(ListUserDevice listUserDevice) {
+	public ListUserDevices removeListUserDevice(ListUserDevices listUserDevice) {
 		getListUserDevices().remove(listUserDevice);
 		listUserDevice.setUserInfo(null);
 

@@ -21,8 +21,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="LIST_USER_DEVICES")
-@NamedQuery(name="ListUserDevice.findAll", query="SELECT l FROM ListUserDevice l")
-public class ListUserDevice implements Serializable {
+@NamedQuery(name="ListUserDevice.findAll", query="SELECT l FROM ListUserDevices l")
+public class ListUserDevices implements Serializable {
 	
 	private static final long serialVersionUID = 1539761765029241482L;
 
@@ -95,7 +95,7 @@ public class ListUserDevice implements Serializable {
 	@OneToMany(mappedBy="listUserDevice")
 	private List<DevicesData> devicesData;
 
-	public ListUserDevice() {
+	public ListUserDevices() {
 	}
 
 	public String getItemId() {

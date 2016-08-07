@@ -55,7 +55,7 @@ public class DevicesData implements Serializable {
 	//bi-directional many-to-one association to ListUserDevice
 	@ManyToOne
 	@JoinColumn(name="ITEM_ID")
-	private ListUserDevice listUserDevice;
+	private ListUserDevices listUserDevice;
 
 	public DevicesData() {
 	}
@@ -156,11 +156,11 @@ public class DevicesData implements Serializable {
 		this.updTs = updTs;
 	}
 
-	public ListUserDevice getListUserDevice() {
+	public ListUserDevices getListUserDevice() {
 		return this.listUserDevice;
 	}
 
-	public void setListUserDevice(ListUserDevice listUserDevice) {
+	public void setListUserDevice(ListUserDevices listUserDevice) {
 		this.listUserDevice = listUserDevice;
 	}
 
