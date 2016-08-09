@@ -1,31 +1,63 @@
 package com.smartway.core.utils;
 
-import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Common {
-	public JSONObject pojo2Json(Object obj) throws  JsonGenerationException, JsonMappingException, IOException, ParseException 
+	
+	/*
+	 * @obj :: object that need to be converted to JSONArray
+	 * @key :: The key name in the JSONObject that is returned 
+	 * Returns : JSONObject
+	 */
+	public JSONObject pojo2JsonObject(Object obj) 
 	{
 		/*Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(obj);*/
-		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonString = objectMapper.writeValueAsString(obj);
-		JSONParser parser = new JSONParser();
-		JSONObject jsonobj = (JSONObject) parser.parse(jsonString);
+		JSONObject jsonobj = new JSONObject();
+		try{
+			ObjectMapper objectMapper = new ObjectMapper();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a z");
+			objectMapper.setDateFormat(df);
+			String jsonString = objectMapper.writeValueAsString(obj);
+			JSONParser parser = new JSONParser();
+			jsonobj = (JSONObject) parser.parse(jsonString);
+		}catch(Exception e){
+			jsonobj.put("ERROR", "Not able to convert to JSON :: "+e.getMessage());
+			jsonobj.put("state", "false");
+		}
 		return jsonobj;
 	}
-	public JSONObject pojo2Json(Object obj, String key) 
+	
+	/*
+	 * @obj :: The arraylist of object that need to be converted to JSONArray
+	 * Returns : JSONArray 
+	 */
+	public JSONArray pojo2JsonArray(Object obj) 
 	{
-		JSONObject object = new JSONObject();
-		object.put(key,obj);
+		JSONArray object = new JSONArray();
+		try{
+			ObjectMapper objectMapper = new ObjectMapper();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a z");
+			objectMapper.setDateFormat(df);
+			String jsonString = objectMapper.writeValueAsString(obj);
+			JSONParser parser = new JSONParser();
+			object = (JSONArray) parser.parse(jsonString);
+		}catch(Exception e){
+			JSONObject ob = new JSONObject();
+			ob.put("ERROR", "Not able to convert to JSON :: "+e.getMessage());
+			ob.put("state", "false");
+			object.add(ob);
+		}
 		return object;
 	}
 	public java.util.Date toDate(Timestamp timestamp) {
