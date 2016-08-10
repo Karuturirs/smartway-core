@@ -16,8 +16,6 @@ import com.smartway.core.mysql.service.GenericService;
 public class GenerateID {
 	 private static Logger logger = Logger.getLogger(GenerateID.class);
 	 private static volatile GenerateID instanceObjectValidator = null;
-	 @Autowired
-	 GenericService genItemIdService;
 	
 	private GenerateID(){
 		
@@ -37,8 +35,8 @@ public class GenerateID {
 	 * @params: lastcustomerid
 	 * @return: nextcustomerid
 	 */
-	public synchronized  String generateNextID(){
-		String lastcustomerid = getlastid();
+	public synchronized  String generateNextID(GenericService genItemIdService){
+		String lastcustomerid = getlastid(genItemIdService);
 		char[]  id=lastcustomerid.toCharArray();
 		String nextcustomerid = "";
 		int len=id.length-1;
@@ -64,12 +62,12 @@ public class GenerateID {
 			nextcustomerid="A"+nextcustomerid;
 		
 		logger.debug("GenerateID::generateNextID:: current new user id:"+nextcustomerid);
-		updateNewId(nextcustomerid);
+		updateNewId(nextcustomerid,genItemIdService);
 		return nextcustomerid;
 	}
 
 
-	private  void updateNewId(String nextcustomerid) {
+	private  void updateNewId(String nextcustomerid,GenericService genItemIdService) {
 		// TODO Auto-generated method stub
 		GenItemid getitemid = new GenItemid();
 		getitemid.setId(1);
@@ -79,7 +77,7 @@ public class GenerateID {
 	}
 
 
-	private  String getlastid() {
+	private  String getlastid(GenericService genItemIdService) {
 		// TODO Auto-generated method stub
 		String getid = (String) genItemIdService.getBySQLQuery("Select IOTID from GEN_ITEMID where ID =1");
 		return getid;
