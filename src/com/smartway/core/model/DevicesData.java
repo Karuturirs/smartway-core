@@ -1,30 +1,20 @@
 package com.smartway.core.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 
 /**
- * The persistent class for the DEVICES_DATA database table.
+ * The persistent class for the devices_data database table.
  * 
  */
 @Entity
-@Table(name="DEVICES_DATA")
+@Table(name="devices_data")
 @NamedQuery(name="DevicesData.findAll", query="SELECT d FROM DevicesData d")
 public class DevicesData implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 3937916044098825313L;
-
-	@GeneratedValue
 	@Id
 	private int id;
 
@@ -48,14 +38,13 @@ public class DevicesData implements Serializable {
 
 	private String col9;
 
-
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
 
 	//bi-directional many-to-one association to ListUserDevice
 	@ManyToOne
 	@JoinColumn(name="ITEM_ID")
-	private ListUserDevices listUserDevice;
+	private ListUserDevice listUserDevice;
 
 	public DevicesData() {
 	}
@@ -156,11 +145,11 @@ public class DevicesData implements Serializable {
 		this.updTs = updTs;
 	}
 
-	public ListUserDevices getListUserDevice() {
+	public ListUserDevice getListUserDevice() {
 		return this.listUserDevice;
 	}
 
-	public void setListUserDevice(ListUserDevices listUserDevice) {
+	public void setListUserDevice(ListUserDevice listUserDevice) {
 		this.listUserDevice = listUserDevice;
 	}
 

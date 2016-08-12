@@ -1,41 +1,33 @@
 package com.smartway.core.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 /**
- * The persistent class for the USER_INFO database table.
+ * The persistent class for the user_info database table.
  * 
  */
 @Entity
-@Table(name="USER_INFO")
+@Table(name="user_info")
 @NamedQuery(name="UserInfo.findAll", query="SELECT u FROM UserInfo u")
 public class UserInfo implements Serializable {
-	
-	private static final long serialVersionUID = 649734565057802740L;
+	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue
 	@Id
-	@Column(name="USER_ID")
-	private int userId;
+	@Column(name="USER_NAME")
+	private String userName;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="CRT_DT")
+	private Date crtDt;
 
 	private String email;
 
@@ -52,23 +44,26 @@ public class UserInfo implements Serializable {
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
 
-	//bi-directional many-to-one association to ListUserDevice
-	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
-	private List<ListUserDevices> listUserDevices;
+	@Column(name="USER_ID")
+	private int userId;
 
-	//bi-directional many-to-one association to UserAuth
-	@OneToMany(mappedBy="userInfo", fetch=FetchType.LAZY)
-	private List<UserAuth> userAuths;
+	//bi-directional many-to-one association to ListUserDevice
+	@OneToMany(mappedBy="userInfo")
+	private List<ListUserDevice> listUserDevices;
+
+	//bi-directional one-to-one association to UserAuth
+	@OneToOne(mappedBy="userInfo")
+	private UserAuth userAuth;
 
 	public UserInfo() {
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public String getUserName() {
+		return this.userName;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public Date getBirthDate() {
@@ -79,6 +74,13 @@ public class UserInfo implements Serializable {
 		this.birthDate = birthDate;
 	}
 
+	public Date getCrtDt() {
+		return this.crtDt;
+	}
+
+	public void setCrtDt(Date crtDt) {
+		this.crtDt = crtDt;
+	}
 
 	public String getEmail() {
 		return this.email;
@@ -128,48 +130,42 @@ public class UserInfo implements Serializable {
 		this.updTs = updTs;
 	}
 
-	public List<ListUserDevices> getListUserDevices() {
+	public int getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public List<ListUserDevice> getListUserDevices() {
 		return this.listUserDevices;
 	}
 
-	public void setListUserDevices(List<ListUserDevices> listUserDevices) {
+	public void setListUserDevices(List<ListUserDevice> listUserDevices) {
 		this.listUserDevices = listUserDevices;
 	}
 
-	public ListUserDevices addListUserDevice(ListUserDevices listUserDevice) {
+	public ListUserDevice addListUserDevice(ListUserDevice listUserDevice) {
 		getListUserDevices().add(listUserDevice);
 		listUserDevice.setUserInfo(this);
 
 		return listUserDevice;
 	}
 
-	public ListUserDevices removeListUserDevice(ListUserDevices listUserDevice) {
+	public ListUserDevice removeListUserDevice(ListUserDevice listUserDevice) {
 		getListUserDevices().remove(listUserDevice);
 		listUserDevice.setUserInfo(null);
 
 		return listUserDevice;
 	}
 
-	public List<UserAuth> getUserAuths() {
-		return this.userAuths;
+	public UserAuth getUserAuth() {
+		return this.userAuth;
 	}
 
-	public void setUserAuths(List<UserAuth> userAuths) {
-		this.userAuths = userAuths;
-	}
-
-	public UserAuth addUserAuth(UserAuth userAuth) {
-		getUserAuths().add(userAuth);
-		userAuth.setUserInfo(this);
-
-		return userAuth;
-	}
-
-	public UserAuth removeUserAuth(UserAuth userAuth) {
-		getUserAuths().remove(userAuth);
-		userAuth.setUserInfo(null);
-
-		return userAuth;
+	public void setUserAuth(UserAuth userAuth) {
+		this.userAuth = userAuth;
 	}
 
 }

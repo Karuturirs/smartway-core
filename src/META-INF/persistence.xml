@@ -3,8 +3,8 @@
 	<persistence-unit name="smartway-core">
 		<class>com.smartway.core.model.DevicesData</class>
 		<class>com.smartway.core.model.GenItemid</class>
-		<class>com.smartway.core.model.ListUserDevices</class>
 		<class>com.smartway.core.model.UserAuth</class>
 		<class>com.smartway.core.model.UserInfo</class>
+		<class>com.smartway.core.model.ListUserDevice</class>
 	</persistence-unit>
 </persistence>

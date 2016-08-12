@@ -1,30 +1,21 @@
 package com.smartway.core.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
 /**
- * The persistent class for the LIST_USER_DEVICES database table.
+ * The persistent class for the list_user_devices database table.
  * 
  */
 @Entity
-@Table(name="LIST_USER_DEVICES")
-@NamedQuery(name="ListUserDevice.findAll", query="SELECT l FROM ListUserDevices l")
-public class ListUserDevices implements Serializable {
-	
-	private static final long serialVersionUID = 1539761765029241482L;
+@Table(name="list_user_devices")
+@NamedQuery(name="ListUserDevice.findAll", query="SELECT l FROM ListUserDevice l")
+public class ListUserDevice implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="ITEM_ID")
@@ -70,8 +61,10 @@ public class ListUserDevices implements Serializable {
 
 	private String col9type;
 
-	
-	@GeneratedValue
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="CRT_DT")
+	private Date crtDt;
+
 	private int id;
 
 	@Column(name="ITEM_DESC")
@@ -86,16 +79,16 @@ public class ListUserDevices implements Serializable {
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
 
-	//bi-directional many-to-one association to UserInfo
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private UserInfo userInfo;
-
 	//bi-directional many-to-one association to DevicesData
 	@OneToMany(mappedBy="listUserDevice")
 	private List<DevicesData> devicesData;
 
-	public ListUserDevices() {
+	//bi-directional many-to-one association to UserInfo
+	@ManyToOne
+	@JoinColumn(name="USER_NAME")
+	private UserInfo userInfo;
+
+	public ListUserDevice() {
 	}
 
 	public String getItemId() {
@@ -266,7 +259,14 @@ public class ListUserDevices implements Serializable {
 		this.col9type = col9type;
 	}
 
-	
+	public Date getCrtDt() {
+		return this.crtDt;
+	}
+
+	public void setCrtDt(Date crtDt) {
+		this.crtDt = crtDt;
+	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -307,14 +307,6 @@ public class ListUserDevices implements Serializable {
 		this.updTs = updTs;
 	}
 
-	public UserInfo getUserInfo() {
-		return this.userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
-
 	public List<DevicesData> getDevicesData() {
 		return this.devicesData;
 	}
@@ -335,6 +327,14 @@ public class ListUserDevices implements Serializable {
 		devicesData.setListUserDevice(null);
 
 		return devicesData;
+	}
+
+	public UserInfo getUserInfo() {
+		return this.userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 
 }

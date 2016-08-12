@@ -1,28 +1,19 @@
 package com.smartway.core.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 
 /**
- * The persistent class for the USER_AUTH database table.
+ * The persistent class for the user_auth database table.
  * 
  */
 @Entity
-@Table(name="USER_AUTH")
+@Table(name="user_auth")
 @NamedQuery(name="UserAuth.findAll", query="SELECT u FROM UserAuth u")
 public class UserAuth implements Serializable {
-	
-
-	private static final long serialVersionUID = -8721473268993927610L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="USER_NAME")
@@ -33,9 +24,12 @@ public class UserAuth implements Serializable {
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
 
-	//bi-directional many-to-one association to UserInfo
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@Column(name="USER_ID")
+	private int userId;
+
+	//bi-directional one-to-one association to UserInfo
+	@OneToOne
+	@JoinColumn(name="USER_NAME")
 	private UserInfo userInfo;
 
 	public UserAuth() {
@@ -49,7 +43,6 @@ public class UserAuth implements Serializable {
 		this.userName = userName;
 	}
 
-	
 	public String getPassword() {
 		return this.password;
 	}
@@ -64,6 +57,14 @@ public class UserAuth implements Serializable {
 
 	public void setUpdTs(Timestamp updTs) {
 		this.updTs = updTs;
+	}
+
+	public int getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public UserInfo getUserInfo() {

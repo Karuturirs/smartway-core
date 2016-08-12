@@ -5,15 +5,14 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the GEN_ITEMID database table.
+ * The persistent class for the gen_itemid database table.
  * 
  */
 @Entity
-@Table(name="GEN_ITEMID")
+@Table(name="gen_itemid")
 @NamedQuery(name="GenItemid.findAll", query="SELECT g FROM GenItemid g")
 public class GenItemid implements Serializable {
-	
-	private static final long serialVersionUID = -1945023939990680765L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;

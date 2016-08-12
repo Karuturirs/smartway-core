@@ -21,7 +21,7 @@
 		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.DevicesData" />
 	</bean>
 	<bean id="listUserDevicesDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
-		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.ListUserDevices" />
+		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.ListUserDevice" />
 	</bean>
 	<bean id="genItemIdDAO" class="com.smartway.core.dao.GenericDaoMYSQLImpl">
 		<constructor-arg type="java.lang.Class" value="com.smartway.core.model.GenItemid" />
