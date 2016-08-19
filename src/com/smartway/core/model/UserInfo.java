@@ -26,7 +26,7 @@ public class UserInfo implements Serializable {
 	private Date birthDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CRT_DT")
+	@Column(name="CRT_DT", nullable = false, updatable=false)
 	private Date crtDt;
 
 	private String email;

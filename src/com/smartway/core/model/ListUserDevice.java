@@ -62,7 +62,7 @@ public class ListUserDevice implements Serializable {
 	private String col9type;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CRT_DT")
+	@Column(name="CRT_DT", nullable = true, updatable=false)
 	private Date crtDt;
 
 	private int id;
