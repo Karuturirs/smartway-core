@@ -38,6 +38,9 @@ public class DevicesData implements Serializable {
 
 	private String col9;
 
+	@Column(name="IN_TS")
+	private Timestamp inTs;
+
 	@Column(name="UPD_TS")
 	private Timestamp updTs;
 
@@ -135,6 +138,14 @@ public class DevicesData implements Serializable {
 
 	public void setCol9(String col9) {
 		this.col9 = col9;
+	}
+
+	public Timestamp getInTs() {
+		return this.inTs;
+	}
+
+	public void setInTs(Timestamp inTs) {
+		this.inTs = inTs;
 	}
 
 	public Timestamp getUpdTs() {
