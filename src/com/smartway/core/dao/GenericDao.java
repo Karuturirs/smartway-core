@@ -1,5 +1,8 @@
 package com.smartway.core.dao;
 
+// demo
+
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
